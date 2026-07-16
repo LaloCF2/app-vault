@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppVault</title>
+    <meta name="description" content="Descarga las mejores aplicaciones, herramientas y mods en AppVault.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navegacion -->
+    <header class="glass-header">
+        <div class="logo">
+            <i class="fa-solid fa-cube logo-icon"></i>
+            <span>AppVault</span>
+        </div>
+        <div class="search-bar">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar...">
+        </div>
+    </header>
+
+    <!-- Titulo Sección -->
+    <section class="hero">
+        <h1 class="hero-title">Explora y Busca lo que <br> <span class="highlight">Necesites</span></h1>
+        <p class="hero-subtitle">El mejor portal para encontrar tus herramientas necesarias.</p>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todo</button>
+            <button class="filter-btn" data-filter="program">Programas</button>
+            <button class="filter-btn" data-filter="tools">Herramientas</button>
+            <button class="filter-btn" data-filter="installer">Instaladores</button>
+            <button class="filter-btn" data-filter="games">Juegos</button>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="app-grid" id="appGrid">
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="appModal">
+        <div class="modal-content glass-panel">
+            <button class="close-btn" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <img src="" alt="App Icon" id="modalIcon" class="modal-icon">
+                <div class="modal-title-group">
+                    <h2 id="modalTitle">App Name</h2>
+                    <span class="badge" id="modalCategory">Category</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription" class="modal-desc"></p>
+                <div class="modal-screenshots" id="modalScreenshots">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="modalDownloadBtn" target="_blank">
+                    <i class="fa-solid fa-link"></i> Ir al Enlace
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-btn lightbox-close" id="lbClose"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-btn lightbox-prev" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <img src="" alt="Captura ampliada" id="lbImage">
+        <button class="lightbox-btn lightbox-next" id="lbNext"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 AppVault | LaloCF</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
