@@ -82,7 +82,7 @@ function renderApps(apps) {
     appGrid.innerHTML = '';
 
     if (apps.length === 0) {
-        appGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No se encontraron aplicaciones.</p>';
+        appGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No se encontro nada.</p>';
         return;
     }
 
@@ -209,7 +209,7 @@ function initCanvas() {
             this.size = Math.random() * 2 + 0.1;
             this.speedX = Math.random() * 1 - 0.5;
             this.speedY = Math.random() * 1 - 0.5;
-            this.color = `rgba(${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 100 + 100)}, 255, ${Math.random() * 0.5})`;
+            this.color = `rgba(255, 255, 255, ${Math.random() * 0.6})`;
         }
 
         update() {
@@ -242,12 +242,7 @@ function initCanvas() {
     function animate() {
         const time = Date.now() * 0.0001;
 
-        const r1 = Math.floor(Math.sin(time) * 10 + 10);
-        const g1 = Math.floor(Math.sin(time + 2) * 10 + 10);
-        const b1 = Math.floor(Math.sin(time + 4) * 20 + 20);
-
-        ctx.fillStyle = `rgba(${r1}, ${g1}, ${b1}, 1)`;
-        ctx.fillRect(0, 0, width, height);
+        ctx.clearRect(0, 0, width, height);
 
         particles.forEach(p => {
             p.update();
@@ -310,4 +305,30 @@ lightbox.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     renderApps(appsData);
     initCanvas();
+
+    const themeBtns = document.querySelectorAll('.theme-btn');
+    const savedTheme = localStorage.getItem('appvault-theme') || 'light';
+    document.body.setAttribute('data-theme', savedTheme);
+    updateThemeActiveBtn(savedTheme);
+
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-set-theme');
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('appvault-theme', theme);
+            updateThemeActiveBtn(theme);
+
+            // Animate icon
+            btn.classList.add(`animate-${theme}`);
+            setTimeout(() => {
+                btn.classList.remove(`animate-${theme}`);
+            }, 600);
+        });
+    });
+
+    function updateThemeActiveBtn(theme) {
+        themeBtns.forEach(b => b.classList.remove('active'));
+        const activeBtn = document.querySelector(`.theme-btn[data-set-theme="${theme}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
 });
